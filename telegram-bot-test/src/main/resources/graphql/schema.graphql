@@ -1,0 +1,37 @@
+union AddWordResult = SuccessResponse | ErrorResponse
+
+type AuthPayload {
+    accessToken: String!
+    refreshToken: String!
+    expiresIn: Int!
+}
+
+input DictionaryInput {
+    word: String!
+    translation: String!
+}
+
+type ErrorResponse {
+    error: String!
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+union LoginResult = AuthPayload | ErrorResponse
+
+type Mutation {
+    signUp(credentials: LoginInput!): LoginResult!
+    signIn(credentials: LoginInput!): LoginResult!
+    addWord(newWord: DictionaryInput!): AddWordResult!
+}
+
+type Query {
+    hello: String!
+}
+
+type SuccessResponse {
+    message: String!
+}
